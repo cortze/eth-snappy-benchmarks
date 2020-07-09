@@ -16,4 +16,4 @@ The code reads all the json files of the given folder and start making the compr
 
 CPU used for the benchmark - Intel(R) Core(TM) i5-6600K CPU @ 3.50GHz
 
-results compressing ethereum blocks can be find on the results.txt file
+Results of compressing ethereum blocks can be find on the results.txt file

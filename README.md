@@ -19,6 +19,9 @@ CPU used for the benchmark - Intel(R) Core(TM) i5-6600K CPU @ 3.50GHz
 results compressing ethereum blocks:
 
 ´Average Compress Ratio:  1.8502550603952752
+
 Max Ratio:  2.4160446800844184 Min Ratio:  1.5071121402580219
+
 Average Compress Speed:  457.1678515328362 MB/s
+
 Max Speed:  762.6247034738244 Min Speed:  15.078406170078727´

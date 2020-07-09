@@ -1,0 +1,123 @@
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block0.json
+Size block (bytes):             65493
+Size block compressed (bytes):  38776
+Encoding time:      1.008721ms
+Decoding time:      331.612µs
+Compression ratio:  1.6890086651537033
+Compression Speed:  64.92677360737012 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block1.json
+Size block (bytes):             129458
+Size block compressed (bytes):  71860
+Encoding time:      1.304082ms
+Decoding time:      673.532µs
+Compression ratio:  1.8015307542443642
+Compression Speed:  99.2713648374872 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block10.json
+Size block (bytes):             1378
+Size block compressed (bytes):  779
+Encoding time:      41.747µs
+Decoding time:      26.906µs
+Compression ratio:  1.7689345314505778
+Compression Speed:  33.00835988214722 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block11.json
+Size block (bytes):             150963
+Size block compressed (bytes):  78961
+Encoding time:      1.264492ms
+Decoding time:      657.138µs
+Compression ratio:  1.9118678841453376
+Compression Speed:  119.38628318724041 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block12.json
+Size block (bytes):             93873
+Size block compressed (bytes):  38854
+Encoding time:      692.053µs
+Decoding time:      351.965µs
+Compression ratio:  2.4160446800844184
+Compression Speed:  135.6442353403569 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block13.json
+Size block (bytes):             79226
+Size block compressed (bytes):  45720
+Encoding time:      764.046µs
+Decoding time:      508.728µs
+Compression ratio:  1.7328521434820647
+Compression Speed:  103.69270960125436 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block14.json
+Size block (bytes):             69026
+Size block compressed (bytes):  36605
+Encoding time:      765.055µs
+Decoding time:      336.778µs
+Compression ratio:  1.885698675044393
+Compression Speed:  90.22357869695644 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block2.json
+Size block (bytes):             132380
+Size block compressed (bytes):  71473
+Encoding time:      2.602906ms
+Decoding time:      636.081µs
+Compression ratio:  1.8521679515341458
+Compression Speed:  50.85854041598122 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block3.json
+Size block (bytes):             133225
+Size block compressed (bytes):  70186
+Encoding time:      1.199072ms
+Decoding time:      625.691µs
+Compression ratio:  1.898170575328413
+Compression Speed:  111.10675589122256 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block4.json
+Size block (bytes):             148826
+Size block compressed (bytes):  83321
+Encoding time:      1.495294ms
+Decoding time:      758.831µs
+Compression ratio:  1.7861763541004068
+Compression Speed:  99.52959083631713 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block5.json
+Size block (bytes):             75869
+Size block compressed (bytes):  42928
+Encoding time:      793.094µs
+Decoding time:      435.321µs
+Compression ratio:  1.767354640327991
+Compression Speed:  95.66205266967093 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block6.json
+Size block (bytes):             136556
+Size block compressed (bytes):  71503
+Encoding time:      1.143822ms
+Decoding time:      376.954µs
+Compression ratio:  1.9097939946575668
+Compression Speed:  119.38570861550137 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block7.json
+Size block (bytes):             9112
+Size block compressed (bytes):  6046
+Encoding time:      87.345µs
+Decoding time:      75.329µs
+Compression ratio:  1.5071121402580219
+Compression Speed:  104.32194172534203 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block8.json
+Size block (bytes):             120028
+Size block compressed (bytes):  67667
+Encoding time:      760.234µs
+Decoding time:      616.145µs
+Compression ratio:  1.77380406993069
+Compression Speed:  157.8829676126035 MB/s
+
+/home/mikelcortes/BSC/SummerInternship/snappy-compression/golang-snappy/eth-snappy-test/data/block9.json
+Size block (bytes):             166587
+Size block compressed (bytes):  81131
+Encoding time:      894.258µs
+Decoding time:      378.713µs
+Compression ratio:  2.053308846187031
+Compression Speed:  186.285166025912 MB/s
+
+Average Compress Ratio:  1.850255060395275
+Average Compress Speed:  104.74573526302423 MB/s

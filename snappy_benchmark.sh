@@ -1,12 +1,12 @@
 #!/bin/bash
 
-ETH_NODE="localhost:5052"
 ENCODING="ssz"
-BLOCK_LIST="target_blocks.csv"
-OUTPUT_FOLDER=$ENCODING"_blocks"
+BLOCK_FOLDER=$ENCODING"_blocks"
+METRICS_FOLDER="results"
+ITERATIONS=10
 
-./eth-snappy-benchmarks fetch-blocks \
-    --eth-node $ETH_NODE  \
-    --encoding $ENCODING \
-    --block-list $BLOCK_LIST \
-    --output-folder $OUTPUT_FOLDER
+./build/snappy-benchmark run \
+  --block-folder $BLOCK_FOLDER \
+  --metrics-folder $METRICS_FOLDER \
+  --encoding $ENCODING \
+  --iterations $ITERATIONS

@@ -39,21 +39,21 @@ type CompressionMetrics struct {
 	RawSize       []int64
 	CompressSize  []int64
 	// benchmark data
-	CompressRatios []time.Duration
-	CompressSpeeds []time.Duration
-	EncodeSpeeds   []float64 // (Bytes/Millisecond)
-	DecodeSpeeds   []float64 // (Bytes/Millisecond)
+	CompressRatios []float64
+	CompressSpeeds []float64
+	EncodeSpeeds   []time.Duration // (Bytes/Millisecond)
+	DecodeSpeeds   []time.Duration // (Bytes/Millisecond)
 	// csv related
 	csvExporter *csvs.CSV
 	csvColumns  []csvs.Stringable
 }
 
-func NewCompressionMetrics(blocksFolder, metricsFolder, metricsFile string) (*CompressionMetrics, error) {
+func NewCompressionMetrics(blocksFolder, metricsFolder, metricsFile, encoding string) (*CompressionMetrics, error) {
 	csvColumns := []csvs.Stringable{
 		FolderName, FileName, RawSize, CompressSize,
 		EncodingTime, DecodingTime, CompressRatio, CompressSpeed}
 
-	csvFile, err := csvs.NewCsv(metricsFolder+"/"+metricsFile, csvColumns)
+	csvFile, err := csvs.NewCsvExporter(metricsFolder+"/"+encoding+"_"+metricsFile, csvColumns)
 	if err != nil {
 		return nil, err
 	}
@@ -66,10 +66,10 @@ func NewCompressionMetrics(blocksFolder, metricsFolder, metricsFile string) (*Co
 		RawSize:       make([]int64, 0),
 		CompressSize:  make([]int64, 0),
 		// metrics
-		EncodeSpeeds:   make([]float64, 0),
-		DecodeSpeeds:   make([]float64, 0),
-		CompressRatios: make([]time.Duration, 0),
-		CompressSpeeds: make([]time.Duration, 0),
+		EncodeSpeeds:   make([]time.Duration, 0),
+		DecodeSpeeds:   make([]time.Duration, 0),
+		CompressRatios: make([]float64, 0),
+		CompressSpeeds: make([]float64, 0),
 		//
 		csvExporter: csvFile,
 		csvColumns:  csvColumns}, nil
@@ -77,28 +77,25 @@ func NewCompressionMetrics(blocksFolder, metricsFolder, metricsFile string) (*Co
 
 func (m *CompressionMetrics) AddResults(
 	file string, rawSize, compressSize int64,
-	compressRatio, compressSpeed time.Duration,
-	encodingSpeed, decodingSpeed float64) {
+	encodingSpeed, decodingSpeed time.Duration,
+	compressRatio, compressSpeed float64) {
 
 	// file related
 	m.FileNames = append(m.FileNames, file)
 	m.RawSize = append(m.RawSize, rawSize)
 	m.CompressSize = append(m.CompressSize, compressSize)
 	// compression related
-	m.CompressRatios = append(m.CompressRatios, compressRatio)
-	m.CompressSpeeds = append(m.CompressRatios, compressSpeed)
 	m.EncodeSpeeds = append(m.EncodeSpeeds, encodingSpeed)
 	m.DecodeSpeeds = append(m.DecodeSpeeds, decodingSpeed)
+	m.CompressRatios = append(m.CompressRatios, compressRatio)
+	m.CompressSpeeds = append(m.CompressSpeeds, compressSpeed)
 }
 
-func (m *CompressionMetrics) GetSummary(target time.Duration) map[aggregator]map[metric]float64 {
-	durationConversion := target
-	floatConversion := float64(time.Nanosecond / durationConversion)
-
-	var avgEncode float64 = 0
-	var avgDecode float64 = 0
-	var avgRatio time.Duration = 0
-	var avgSpeed time.Duration = 0
+func (m *CompressionMetrics) GetSummary() map[aggregator]map[metric]float64 {
+	var avgEncode time.Duration = 0
+	var avgDecode time.Duration = 0
+	var avgRatio float64 = 0
+	var avgSpeed float64 = 0
 
 	items := len(m.FileNames)
 	for i := 0; i < items; i++ {
@@ -107,32 +104,32 @@ func (m *CompressionMetrics) GetSummary(target time.Duration) map[aggregator]map
 		avgEncode = avgEncode + m.EncodeSpeeds[i]
 		avgDecode = avgDecode + m.DecodeSpeeds[i]
 	}
-	EncodeMin, EncodeMax := findMinAndMax(m.EncodeSpeeds)
-	DecodeMin, DecodeMax := findMinAndMax(m.DecodeSpeeds)
+	encodeMin, encodeMax := findMinAndMax(m.EncodeSpeeds)
+	decodeMin, decodeMax := findMinAndMax(m.DecodeSpeeds)
 	ratioMin, ratioMax := findMinAndMax(m.CompressRatios)
 	speedMin, speedMax := findMinAndMax(m.CompressSpeeds)
 
 	summary := make(map[aggregator]map[metric]float64, 3)
 
 	minSummary := map[metric]float64{
-		EncodingTime:  EncodeMin,
-		DecodingTime:  DecodeMin,
-		CompressRatio: float64(ratioMin) / floatConversion,
-		CompressSpeed: float64(speedMin) / floatConversion,
+		EncodingTime:  float64(encodeMin.Nanoseconds()),
+		DecodingTime:  float64(decodeMin.Nanoseconds()),
+		CompressRatio: ratioMin,
+		CompressSpeed: speedMin,
 	}
 
 	maxSummary := map[metric]float64{
-		EncodingTime:  EncodeMax,
-		DecodingTime:  DecodeMax,
-		CompressRatio: float64(ratioMax) / floatConversion,
-		CompressSpeed: float64(speedMax) / floatConversion,
+		EncodingTime:  float64(encodeMax.Nanoseconds()),
+		DecodingTime:  float64(decodeMax.Nanoseconds()),
+		CompressRatio: ratioMax,
+		CompressSpeed: speedMax,
 	}
 
 	avgSummary := map[metric]float64{
-		EncodingTime:  avgEncode / float64(items),
-		DecodingTime:  avgEncode / float64(items),
-		CompressRatio: (float64(avgRatio) / floatConversion) / float64(items),
-		CompressSpeed: (float64(avgSpeed) / floatConversion) / float64(items),
+		EncodingTime:  float64(avgEncode.Nanoseconds()) / float64(items),
+		DecodingTime:  float64(avgEncode.Nanoseconds()) / float64(items),
+		CompressRatio: float64(avgRatio) / float64(items),
+		CompressSpeed: float64(avgSpeed) / float64(items),
 	}
 
 	summary[Minimum] = minSummary
@@ -165,6 +162,9 @@ func (m *CompressionMetrics) rowComposer(rawRow []interface{}) []string {
 			row[idx] = fmt.Sprintf("%d", item.(int64))
 		case string:
 			row[idx] = item.(string)
+		case time.Duration:
+			newItem := item.(time.Duration)
+			row[idx] = fmt.Sprintf("%.6f", float64(newItem.Nanoseconds()))
 		default:
 			row[idx] = fmt.Sprint(item)
 		}

@@ -1,3 +1,4 @@
 # ignore the Goland file
 .idea
 .ipynb_checkpoints/
+build/

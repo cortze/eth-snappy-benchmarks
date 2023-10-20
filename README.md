@@ -1,14 +1,14 @@
-# eth-snappy-test
-Benchmark repository to meassure the compression ratio and speed of Ethereum CL block using the snappy compression and the `Golang` implementation.
+# Eth snappy benchmarks
+Benchmark repository to measure the compression ratio and speed of Ethereum CL block using the snappy compression and the `Golang` implementation.
 
 ## Motivation
-As in any other blcokchain, Ethereum CL blocks needs to be broadcasted through a p2p network layer. Because the size of this blocks tends to increase over time, e.g. more validators a added to the chain over time or we increase the size to aggregate more blocks, there is a huge need to reduce the overall chunck of bytes that we send over the wire.
+Ethereum CL blocks need to be broadcasted through a p2p network layer as in any other blockchain. Because the size of these blocks tends to increase over time, e.g., more validators are added to the chain over time, or we increase the size to aggregate more blocks, there is a considerable need to reduce the overall chunk of bytes that we send over the wire.
 
-Ethereum uses the [`ssz`](https://github.com/ethereum/consensus-specs/blob/dev/ssz/simple-serialize.md) serialization (more optimized than the plain `json` ) for broadcasting, in a combination with the [Snappy Compression](https://github.com/google/snappy) algorithm to broadcast all their messages over the network.
+Ethereum uses the [`ssz`](https://github.com/ethereum/consensus-specs/blob/dev/ssz/simple-serialize.md) serialization (more optimized than the plain `json` ) for broadcasting, in combination with the [Snappy Compression](https://github.com/google/snappy) algorithm to broadcast all their messages over the network.
 
 ![img width=70%](./analysis/plots/raw_size_cdf.png)
 
-This repo brings some data of the time/performance of the snappy compression over the serialized Ethereum's beacon blocks.
+This repo brings some data on the time/performance of the snappy compression over the serialized Ethereum's beacon blocks.
 
 ## Usage
 
@@ -29,14 +29,14 @@ bash block_downloader.sh
 bash snappy_benchmark.sh
 ```
 
-Note: the code execution can me modified by changing the parameters on each `<.sh>` script, where the serialization of the blocks, and the output folders and formats can be defined.
+Note: the code execution can be modified by changing the parameters on each `<.sh>` script, where the serialization of the blocks and the output folders and formats can be defined.
 
     
 ## Results
 
-We ran the Go version of [snappy](github.com/golang/snappy) v0.0.4 on a AMD Ryzen 9 5900X 12-Core Processor.
+We ran the Go version of [snappy](github.com/golang/snappy) v0.0.4 on an AMD Ryzen 9 5900X 12-Core Processor.
 The current results were generated from Ethereum's [100 blocks](./target_blocks.csv) downloaded from a local Beacon Node in Mainnet.
-We ran the test 10 times for each block and we always obtained the exact same compressed result for each block, but the compression time changes, so we take the average of the 10 runs. 
+We ran the test 10 times for each block, and we always obtained the exact same compressed result for each block, but the compression time changes, so we took the average of the ten runs. 
 
 | metric                   | AVG JSON values | AVG SSZ values | 
 |--------------------------|-----------------|------------| 
